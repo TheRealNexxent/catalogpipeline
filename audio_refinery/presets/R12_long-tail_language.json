@@ -1,0 +1,146 @@
+{
+  "name": "Audio \u00b7 Long-tail language",
+  "version": 1,
+  "kind": "route",
+  "route_id": "R12",
+  "priority": 13,
+  "description": "Language without a specialised ASR model. Broad multilingual ASR; PII coverage flagged as limited.",
+  "profile": "Balanced",
+  "trigger": [
+    [
+      "lid_has_specialised_asr",
+      "==",
+      false
+    ]
+  ],
+  "steps": [
+    {
+      "id": "decode.probe"
+    },
+    {
+      "id": "decode.full"
+    },
+    {
+      "id": "gates.basic"
+    },
+    {
+      "id": "cache.lookup"
+    },
+    {
+      "id": "dsp.levels"
+    },
+    {
+      "id": "dsp.loudness"
+    },
+    {
+      "id": "dsp.silence"
+    },
+    {
+      "id": "dsp.bit_depth"
+    },
+    {
+      "id": "dsp.spectral"
+    },
+    {
+      "id": "dsp.hum"
+    },
+    {
+      "id": "dsp.dropouts"
+    },
+    {
+      "id": "dsp.stereo"
+    },
+    {
+      "id": "snr.wada"
+    },
+    {
+      "id": "fingerprint.compute"
+    },
+    {
+      "id": "classify.content.gpu"
+    },
+    {
+      "id": "speaker.embed",
+      "when": [
+        [
+          "content_class",
+          "==",
+          "speech"
+        ]
+      ]
+    },
+    {
+      "id": "vad"
+    },
+    {
+      "id": "snr_c50"
+    },
+    {
+      "id": "quality.general"
+    },
+    {
+      "id": "mos.speech",
+      "when": [
+        [
+          "profile_tts",
+          "==",
+          true
+        ]
+      ]
+    },
+    {
+      "id": "lid"
+    },
+    {
+      "id": "asr"
+    },
+    {
+      "id": "align.words"
+    },
+    {
+      "id": "pii.detect"
+    },
+    {
+      "id": "pii.redact"
+    },
+    {
+      "id": "ai_detect"
+    },
+    {
+      "id": "emotion",
+      "when": [
+        [
+          "enrich",
+          "==",
+          true
+        ]
+      ]
+    },
+    {
+      "id": "text.enrich",
+      "when": [
+        [
+          "enrich",
+          "==",
+          true
+        ]
+      ]
+    },
+    {
+      "id": "demographics",
+      "when": [
+        [
+          "enrich",
+          "==",
+          true
+        ]
+      ]
+    }
+  ],
+  "skips": [
+    "specialised ASR"
+  ],
+  "preserve_originals": true,
+  "privacy_required": true,
+  "automatic": true
+}

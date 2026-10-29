@@ -1,0 +1,29 @@
+{
+  "name": "Modifier \u00b7 Strict PII domain",
+  "kind": "modifier",
+  "version": 1,
+  "description": "Pharma/medical, legal, finance, children. Forces full-coverage ASR, PII and verification; unresolved PII rejects.",
+  "trigger": [
+    [
+      "domain",
+      "in",
+      [
+        "pharma",
+        "medical",
+        "legal",
+        "finance",
+        "children"
+      ]
+    ]
+  ],
+  "add_steps": [
+    "asr",
+    "align.words",
+    "pii.detect",
+    "pii.medical",
+    "pii.redact"
+  ],
+  "policy": {
+    "unresolved_pii": "reject"
+  }
+}

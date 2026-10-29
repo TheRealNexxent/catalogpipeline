@@ -1,0 +1,293 @@
+{
+  "version": "0.3-draft",
+  "date": "2026-10-29",
+  "note": "Measured on dev fixtures (Windows TTS speech + synthetic defects) on an RTX 3070 laptop: results/DESKTOP-TQKLFGI_20261029_192001. Fixture speech is all synthetic and English, so language-ID and AI-speech numbers are one-sided until real labelled data is added. Wave 2/3 rows: verified on single test files (smoke tests); the full multi-file benchmark was stopped on the 8 GB GPU and is to be re-run on the DGX.",
+  "tasks": [
+    {
+      "step": "decode.probe + decode.full",
+      "status": "selected",
+      "primary": "ffprobe + one ffmpeg s32 decode",
+      "measured": {
+        "realtime_x": 120,
+        "accuracy": "gates 107/107"
+      }
+    },
+    {
+      "step": "gates.basic",
+      "status": "selected",
+      "primary": "in-house G1-G6",
+      "measured": {
+        "accuracy": "107/107"
+      }
+    },
+    {
+      "step": "dsp.*",
+      "status": "selected",
+      "primary": "in-house numpy/scipy",
+      "measured": {
+        "accuracy": "all DSP checks pass on dev fixtures",
+        "slowest_realtime_x": 410
+      }
+    },
+    {
+      "step": "fingerprint",
+      "status": "benchmarking",
+      "candidates": [
+        "fp-philips (in-house)",
+        "Chromaprint"
+      ],
+      "measured": {
+        "fp-philips": {
+          "accuracy": "7/7",
+          "realtime_x": 344
+        }
+      },
+      "threshold": "similarity >= 0.65 (BER <= 0.35)"
+    },
+    {
+      "step": "classify.content.gpu",
+      "status": "selected",
+      "primary": "EfficientAT mn10_as",
+      "measured": {
+        "accuracy": "76/77 (98.7%)",
+        "realtime_x": 143
+      },
+      "competitor": {
+        "dsp_baseline": {
+          "accuracy": "48/77 (62.3%)",
+          "realtime_x": 607
+        }
+      },
+      "note": "router input; DSP baseline kept only as CPU-only fallback",
+      "licence": "MIT, AudioSet-derived (dataset flag)"
+    },
+    {
+      "step": "events.tagging",
+      "status": "selected",
+      "primary": "EfficientAT mn10_as (same pass as content class, no extra cost)"
+    },
+    {
+      "step": "vad",
+      "status": "selected",
+      "primary": "Silero VAD",
+      "measured": {
+        "frame_f1": 0.946,
+        "f1_babble": 0.907,
+        "f1_0db": 0.931,
+        "realtime_x": 72
+      },
+      "escalation": "pyannote segmentation-3.0 (gated)",
+      "licence": "MIT"
+    },
+    {
+      "step": "snr",
+      "status": "benchmarking",
+      "candidates": [
+        "snr.wada",
+        "snr.energy",
+        "Brouhaha"
+      ],
+      "measured": {
+        "snr.wada": {
+          "mae_db": 3.88,
+          "mae_babble_db": 9.3
+        },
+        "snr.energy": {
+          "mae_db": 5.04,
+          "mae_babble_db": 10.18
+        }
+      },
+      "interim_primary": "snr.wada",
+      "gap": "both fail on babble; Brouhaha needs a Python <=3.12 env (deferred to DGX container)"
+    },
+    {
+      "step": "mos.speech",
+      "status": "selected_tts_only",
+      "candidates": [
+        "UTMOSv2",
+        "DNSMOS P.835 (legal review)",
+        "Audiobox Aesthetics"
+      ],
+      "measured": {
+        "utmosv2": {
+          "spearman_vs_snr": 0.343,
+          "mean_mos_0db": 1.91,
+          "mean_mos_30db": 2.31,
+          "realtime_x": 13.7
+        }
+      },
+      "finding": "UTMOSv2 tracks voice naturalness more than noise and is the slowest step (59% of run time). Keep it for the TTS profile only; benchmark DNSMOS / Audiobox Aesthetics as the general quality score.",
+      "excluded": [
+        "NISQA"
+      ],
+      "primary": "UTMOSv2 (TTS profile only)",
+      "general_quality": "Audiobox Aesthetics (quality.general)"
+    },
+    {
+      "step": "lid",
+      "status": "selected_provisional",
+      "primary": "SpeechBrain VoxLingua107 ECAPA",
+      "measured": {
+        "accuracy": "73/73 (English only)",
+        "realtime_x": 710
+      },
+      "next": "FLEURS multilingual test",
+      "excluded": [
+        "MMS-LID"
+      ]
+    },
+    {
+      "step": "ai_detect",
+      "status": "selected_provisional",
+      "primary": "AASIST",
+      "measured": {
+        "flagged_known_synthetic": "73/73",
+        "realtime_x": 521
+      },
+      "next": "needs real (bona fide) speech to measure false alarms; ASVspoof 2019 LA eval + In-the-Wild",
+      "excluded": [
+        "AASIST3"
+      ]
+    },
+    {
+      "step": "snr_c50",
+      "status": "deferred",
+      "candidates": [
+        "Brouhaha"
+      ]
+    },
+    {
+      "step": "asr",
+      "status": "selected_windows",
+      "candidates": [
+        "Parakeet-TDT v2/v3",
+        "Canary-1b-flash/v2",
+        "IndicConformer",
+        "Whisper large-v3-turbo",
+        "Omnilingual ASR"
+      ],
+      "primary": "Whisper large-v3-turbo (all languages on Windows)",
+      "dgx_plan": "Parakeet-TDT for English/European, IndicConformer for Indic, Whisper for the rest",
+      "smoke": "both PII sentences transcribed word-perfect; 1.5 s for 9 s of speech after load"
+    },
+    {
+      "step": "align.words",
+      "status": "selected",
+      "candidates": [
+        "Whisper word timestamps",
+        "CTC forced alignment"
+      ],
+      "primary": "Whisper word timestamps"
+    },
+    {
+      "step": "pii.detect",
+      "status": "selected",
+      "candidates": [
+        "Presidio + regex/checksum",
+        "GLiNER-PII"
+      ],
+      "primary": "Presidio + GLiNER-PII (union)",
+      "smoke": "general: PERSON, PHONE, EMAIL all found (Presidio alone missed phone and email); pharma: PERSON, DATE_TIME (birth), MEDICAL all found",
+      "rule": "score >= 0.85 muted, 0.50-0.85 human review; generic dates ignored"
+    },
+    {
+      "step": "diarize",
+      "status": "selected_windows",
+      "candidates": [
+        "Sortformer streaming v2/v2.1",
+        "pyannote 3.1 / community-1"
+      ],
+      "primary": "ECAPA embeddings + agglomerative clustering",
+      "smoke": "2 of 2 speakers, turn boundaries within about 1 s",
+      "dgx_plan": "compare with Sortformer v2 / pyannote (gated: needs your HF token)"
+    },
+    {
+      "step": "speaker.embed",
+      "status": "selected",
+      "candidates": [
+        "TitaNet",
+        "SpeechBrain ECAPA",
+        "WeSpeaker"
+      ],
+      "primary": "SpeechBrain ECAPA",
+      "smoke": "speaker hint 2 on the conversation, 1 on single-speaker speech"
+    },
+    {
+      "step": "separate.vocals",
+      "status": "selected",
+      "candidates": [
+        "Demucs htdemucs (dataset flag)"
+      ],
+      "primary": "Demucs htdemucs (training-data flag)",
+      "smoke": "vocals extracted from the bundle mix"
+    },
+    {
+      "step": "quality.general",
+      "status": "selected",
+      "candidates": [
+        "Audiobox Aesthetics"
+      ],
+      "primary": "Audiobox Aesthetics",
+      "smoke": "production quality 3.76 at 0 dB vs 5.02 at 30 dB SNR; music 6.9, rain 5.1"
+    },
+    {
+      "step": "music.analysis",
+      "status": "selected",
+      "candidates": [
+        "LAION-CLAP music"
+      ],
+      "primary": "librosa tempo/key + LAION-CLAP zero-shot genre/mood",
+      "smoke": "117.5 BPM on a 120 BPM track"
+    },
+    {
+      "step": "bioacoustic",
+      "status": "selected_coarse",
+      "candidates": [
+        "Perch 2.0 (dataset flag)"
+      ],
+      "primary": "EfficientAT AudioSet animal classes",
+      "dgx_plan": "Perch 2.0 for species"
+    },
+    {
+      "step": "emotion",
+      "status": "placeholder",
+      "candidates": [
+        "emotion2vec+ (legal review)",
+        "own head"
+      ],
+      "primary": "LAION-CLAP zero-shot (untrained)",
+      "next": "train a head on CREMA-D (ODbL) or clear emotion2vec"
+    },
+    {
+      "step": "demographics",
+      "status": "blocked",
+      "candidates": [
+        "own head on ECAPA/WavLM, Common Voice labels"
+      ],
+      "reason": "no commercial-safe model; training labels (e.g. Common Voice) need terms you accept"
+    },
+    {
+      "step": "text.enrich",
+      "status": "selected",
+      "primary": "Qwen2.5-1.5B-Instruct (Apache-2.0)",
+      "smoke": "topic/summary/sentiment as JSON; summaries omit personal details"
+    },
+    {
+      "step": "duplex.crosstalk + bundle.verify_tracks",
+      "status": "selected",
+      "primary": "in-house DSP"
+    }
+  ],
+  "speed_3070": {
+    "end_to_end_realtime_x": 9.7,
+    "without_utmos_realtime_x": 24,
+    "peak_gpu_mb": 2486,
+    "model_load_s": {
+      "silero_vad": 0.25,
+      "efficientat_mn10": 2.83,
+      "utmosv2": 12.98,
+      "voxlingua107": 1.35,
+      "aasist": 0.17
+    }
+  }
+}

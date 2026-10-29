@@ -1,0 +1,98 @@
+{
+  "name": "Audio \u00b7 Music",
+  "version": 1,
+  "kind": "route",
+  "route_id": "R08",
+  "priority": 10,
+  "description": "Mostly music. Music quality, tags, tempo/key; ASR on vocals only if a profile needs lyrics.",
+  "profile": "Balanced",
+  "trigger": [
+    [
+      "content_class",
+      "==",
+      "music"
+    ]
+  ],
+  "steps": [
+    {
+      "id": "decode.probe"
+    },
+    {
+      "id": "decode.full"
+    },
+    {
+      "id": "gates.basic"
+    },
+    {
+      "id": "cache.lookup"
+    },
+    {
+      "id": "dsp.levels"
+    },
+    {
+      "id": "dsp.loudness"
+    },
+    {
+      "id": "dsp.silence"
+    },
+    {
+      "id": "dsp.bit_depth"
+    },
+    {
+      "id": "dsp.spectral"
+    },
+    {
+      "id": "dsp.hum"
+    },
+    {
+      "id": "dsp.dropouts"
+    },
+    {
+      "id": "dsp.stereo"
+    },
+    {
+      "id": "snr.wada"
+    },
+    {
+      "id": "fingerprint.compute"
+    },
+    {
+      "id": "classify.content.gpu"
+    },
+    {
+      "id": "speaker.embed",
+      "when": [
+        [
+          "content_class",
+          "==",
+          "speech"
+        ]
+      ]
+    },
+    {
+      "id": "quality.general"
+    },
+    {
+      "id": "music.analysis"
+    },
+    {
+      "id": "events.tagging"
+    },
+    {
+      "id": "separate.vocals",
+      "when": [
+        [
+          "p_speech_max",
+          ">=",
+          0.5
+        ]
+      ]
+    }
+  ],
+  "skips": [
+    "speech models"
+  ],
+  "preserve_originals": true,
+  "privacy_required": true,
+  "automatic": true
+}

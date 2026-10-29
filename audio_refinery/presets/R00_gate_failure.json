@@ -1,0 +1,33 @@
+{
+  "name": "Audio \u00b7 Gate failure",
+  "version": 1,
+  "kind": "route",
+  "route_id": "R00",
+  "priority": 0,
+  "description": "File failed a hard gate (empty, unreadable, truncated, silent, too short). Nothing else runs.",
+  "profile": "Balanced",
+  "trigger": [
+    [
+      "gates_failed",
+      "!=",
+      []
+    ]
+  ],
+  "steps": [
+    {
+      "id": "decode.probe"
+    },
+    {
+      "id": "decode.full"
+    },
+    {
+      "id": "gates.basic"
+    }
+  ],
+  "skips": [
+    "all analysis"
+  ],
+  "preserve_originals": true,
+  "privacy_required": true,
+  "automatic": true
+}

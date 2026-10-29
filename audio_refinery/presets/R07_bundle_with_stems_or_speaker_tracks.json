@@ -1,0 +1,183 @@
+{
+  "name": "Audio \u00b7 Bundle with stems or speaker tracks",
+  "version": 1,
+  "kind": "route",
+  "route_id": "R07",
+  "priority": 4,
+  "description": "Uses the supplied vocals stem and speaker tracks instead of separation and diarization.",
+  "profile": "Balanced",
+  "trigger": [
+    [
+      "bundle_role",
+      "in",
+      [
+        "source",
+        "vocals",
+        "accompaniment",
+        "speaker"
+      ]
+    ]
+  ],
+  "steps": [
+    {
+      "id": "decode.probe"
+    },
+    {
+      "id": "decode.full"
+    },
+    {
+      "id": "gates.basic"
+    },
+    {
+      "id": "cache.lookup"
+    },
+    {
+      "id": "dsp.levels"
+    },
+    {
+      "id": "dsp.loudness"
+    },
+    {
+      "id": "dsp.silence"
+    },
+    {
+      "id": "dsp.bit_depth"
+    },
+    {
+      "id": "dsp.spectral"
+    },
+    {
+      "id": "dsp.hum"
+    },
+    {
+      "id": "dsp.dropouts"
+    },
+    {
+      "id": "dsp.stereo"
+    },
+    {
+      "id": "snr.wada"
+    },
+    {
+      "id": "fingerprint.compute"
+    },
+    {
+      "id": "classify.content.gpu"
+    },
+    {
+      "id": "speaker.embed",
+      "when": [
+        [
+          "content_class",
+          "==",
+          "speech"
+        ]
+      ]
+    },
+    {
+      "id": "bundle.verify_tracks",
+      "when": [
+        [
+          "bundle_role",
+          "==",
+          "speaker"
+        ]
+      ]
+    },
+    {
+      "id": "vad",
+      "when": [
+        [
+          "bundle_role",
+          "in",
+          [
+            "source",
+            "vocals",
+            "speaker"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "quality.general",
+      "when": [
+        [
+          "bundle_role",
+          "in",
+          [
+            "source",
+            "vocals",
+            "speaker"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "lid",
+      "when": [
+        [
+          "bundle_role",
+          "==",
+          "vocals"
+        ]
+      ]
+    },
+    {
+      "id": "asr",
+      "when": [
+        [
+          "bundle_role",
+          "==",
+          "speaker"
+        ]
+      ]
+    },
+    {
+      "id": "pii.detect",
+      "when": [
+        [
+          "bundle_role",
+          "==",
+          "speaker"
+        ]
+      ]
+    },
+    {
+      "id": "pii.redact",
+      "when": [
+        [
+          "bundle_role",
+          "==",
+          "speaker"
+        ]
+      ]
+    },
+    {
+      "id": "ai_detect",
+      "when": [
+        [
+          "bundle_role",
+          "==",
+          "speaker"
+        ]
+      ]
+    },
+    {
+      "id": "music.analysis",
+      "when": [
+        [
+          "bundle_role",
+          "==",
+          "accompaniment"
+        ]
+      ]
+    }
+  ],
+  "skips": [
+    "separate.vocals",
+    "diarize"
+  ],
+  "preserve_originals": true,
+  "privacy_required": true,
+  "automatic": true
+}

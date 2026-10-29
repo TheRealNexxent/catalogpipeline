@@ -1,0 +1,79 @@
+{
+  "name": "Audio \u00b7 Silent or near-empty",
+  "version": 1,
+  "kind": "route",
+  "route_id": "R02",
+  "priority": 2,
+  "description": "Almost no content; signal checks only.",
+  "profile": "Balanced",
+  "trigger": [
+    [
+      "silence_pct",
+      ">=",
+      95
+    ]
+  ],
+  "steps": [
+    {
+      "id": "decode.probe"
+    },
+    {
+      "id": "decode.full"
+    },
+    {
+      "id": "gates.basic"
+    },
+    {
+      "id": "cache.lookup"
+    },
+    {
+      "id": "dsp.levels"
+    },
+    {
+      "id": "dsp.loudness"
+    },
+    {
+      "id": "dsp.silence"
+    },
+    {
+      "id": "dsp.bit_depth"
+    },
+    {
+      "id": "dsp.spectral"
+    },
+    {
+      "id": "dsp.hum"
+    },
+    {
+      "id": "dsp.dropouts"
+    },
+    {
+      "id": "dsp.stereo"
+    },
+    {
+      "id": "snr.wada"
+    },
+    {
+      "id": "fingerprint.compute"
+    },
+    {
+      "id": "classify.content.gpu"
+    },
+    {
+      "id": "speaker.embed",
+      "when": [
+        [
+          "content_class",
+          "==",
+          "speech"
+        ]
+      ]
+    }
+  ],
+  "skips": [
+    "all GPU models"
+  ],
+  "preserve_originals": true,
+  "privacy_required": true,
+  "automatic": true
+}

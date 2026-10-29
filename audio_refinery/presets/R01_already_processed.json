@@ -1,0 +1,36 @@
+{
+  "name": "Audio \u00b7 Already processed",
+  "version": 1,
+  "kind": "route",
+  "route_id": "R01",
+  "priority": 1,
+  "description": "Decoded audio identical to a file already processed; results are copied.",
+  "profile": "Balanced",
+  "trigger": [
+    [
+      "cache_hit",
+      "==",
+      true
+    ]
+  ],
+  "steps": [
+    {
+      "id": "decode.probe"
+    },
+    {
+      "id": "decode.full"
+    },
+    {
+      "id": "gates.basic"
+    },
+    {
+      "id": "cache.lookup"
+    }
+  ],
+  "skips": [
+    "all analysis"
+  ],
+  "preserve_originals": true,
+  "privacy_required": true,
+  "automatic": true
+}

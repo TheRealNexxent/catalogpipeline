@@ -1,0 +1,89 @@
+{
+  "name": "Audio \u00b7 Environmental / SFX / animals / machines",
+  "version": 1,
+  "kind": "route",
+  "route_id": "R09",
+  "priority": 11,
+  "description": "Non-speech events. Event tagging; bioacoustic model only if animals are detected.",
+  "profile": "Balanced",
+  "trigger": [
+    [
+      "content_class",
+      "==",
+      "noise_or_ambient"
+    ]
+  ],
+  "steps": [
+    {
+      "id": "decode.probe"
+    },
+    {
+      "id": "decode.full"
+    },
+    {
+      "id": "gates.basic"
+    },
+    {
+      "id": "cache.lookup"
+    },
+    {
+      "id": "dsp.levels"
+    },
+    {
+      "id": "dsp.loudness"
+    },
+    {
+      "id": "dsp.silence"
+    },
+    {
+      "id": "dsp.bit_depth"
+    },
+    {
+      "id": "dsp.spectral"
+    },
+    {
+      "id": "dsp.hum"
+    },
+    {
+      "id": "dsp.dropouts"
+    },
+    {
+      "id": "dsp.stereo"
+    },
+    {
+      "id": "snr.wada"
+    },
+    {
+      "id": "fingerprint.compute"
+    },
+    {
+      "id": "classify.content.gpu"
+    },
+    {
+      "id": "speaker.embed",
+      "when": [
+        [
+          "content_class",
+          "==",
+          "speech"
+        ]
+      ]
+    },
+    {
+      "id": "events.tagging"
+    },
+    {
+      "id": "quality.general"
+    },
+    {
+      "id": "bioacoustic"
+    }
+  ],
+  "skips": [
+    "speech models",
+    "music models"
+  ],
+  "preserve_originals": true,
+  "privacy_required": true,
+  "automatic": true
+}

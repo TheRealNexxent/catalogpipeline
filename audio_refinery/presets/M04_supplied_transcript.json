@@ -1,0 +1,16 @@
+{
+  "name": "Modifier \u00b7 Supplied transcript",
+  "kind": "modifier",
+  "version": 1,
+  "description": "Transcript provided: align it and spot-check word error rate instead of running full ASR (unless strict PII).",
+  "trigger": [
+    [
+      "has_transcript",
+      "==",
+      true
+    ]
+  ],
+  "replace_steps": {
+    "asr": "align.words"
+  }
+}

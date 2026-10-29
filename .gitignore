@@ -1,0 +1,17 @@
+# secrets
+.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# downloaded models and cloned third-party code (see audio_refinery/README.md to fetch them)
+audio_refinery/models_cache/
+audio_refinery/vendor/
+
+# generated audio and outputs (rebuild with bakeoff/make_fixtures.py and bakeoff/make_deliveries.py)
+audio_refinery/fixtures/
+audio_refinery/demo_deliveries/
+audio_refinery/derivatives/
+audio_refinery/releases/

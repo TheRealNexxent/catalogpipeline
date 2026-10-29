@@ -1,0 +1,91 @@
+{
+  "name": "Audio \u00b7 Mixed or uncertain",
+  "version": 1,
+  "kind": "route",
+  "route_id": "R10",
+  "priority": 12,
+  "description": "No dominant class on sampled windows. Whole-file segment classification, then each segment is re-routed.",
+  "profile": "Balanced",
+  "trigger": [
+    [
+      "content_class",
+      "in",
+      [
+        "mixed",
+        null
+      ]
+    ]
+  ],
+  "steps": [
+    {
+      "id": "decode.probe"
+    },
+    {
+      "id": "decode.full"
+    },
+    {
+      "id": "gates.basic"
+    },
+    {
+      "id": "cache.lookup"
+    },
+    {
+      "id": "dsp.levels"
+    },
+    {
+      "id": "dsp.loudness"
+    },
+    {
+      "id": "dsp.silence"
+    },
+    {
+      "id": "dsp.bit_depth"
+    },
+    {
+      "id": "dsp.spectral"
+    },
+    {
+      "id": "dsp.hum"
+    },
+    {
+      "id": "dsp.dropouts"
+    },
+    {
+      "id": "dsp.stereo"
+    },
+    {
+      "id": "snr.wada"
+    },
+    {
+      "id": "fingerprint.compute"
+    },
+    {
+      "id": "classify.content.gpu"
+    },
+    {
+      "id": "speaker.embed",
+      "when": [
+        [
+          "content_class",
+          "==",
+          "speech"
+        ]
+      ]
+    },
+    {
+      "id": "classify.content.gpu"
+    },
+    {
+      "id": "vad"
+    },
+    {
+      "id": "events.tagging"
+    }
+  ],
+  "skips": [
+    "nothing heavy until segments are routed"
+  ],
+  "preserve_originals": true,
+  "privacy_required": true,
+  "automatic": true
+}

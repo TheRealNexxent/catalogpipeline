@@ -1,0 +1,504 @@
+{
+  "machine": {
+    "host": "DESKTOP-TQKLFGI",
+    "os": "Windows 11",
+    "arch": "AMD64",
+    "cpu_count": 16,
+    "python": "3.13.5",
+    "gpu": "NVIDIA GeForce RTX 3070 Laptop GPU, 8192 MiB, 610.62"
+  },
+  "files": 116,
+  "audio_hours": 0.4803,
+  "wall_s": 178.14,
+  "end_to_end_realtime_x": 9.7,
+  "task_accuracy": {
+    "gates": {
+      "passed": 107,
+      "total": 107,
+      "pct": 100.0,
+      "failures": []
+    },
+    "spectral (fake hi-res / lossy origin)": {
+      "passed": 4,
+      "total": 4,
+      "pct": 100.0,
+      "failures": []
+    },
+    "bit depth": {
+      "passed": 3,
+      "total": 3,
+      "pct": 100.0,
+      "failures": []
+    },
+    "stereo checks": {
+      "passed": 5,
+      "total": 5,
+      "pct": 100.0,
+      "failures": []
+    },
+    "content class: EfficientAT (GPU)": {
+      "passed": 76,
+      "total": 77,
+      "pct": 98.7,
+      "failures": [
+        {
+          "file": "routes/mixed_music_speech.wav",
+          "ok": false,
+          "detail": "expected mixed got music (windows {'speech': 0.33, 'music': 0.67})"
+        }
+      ]
+    },
+    "content class: DSP baseline (CPU)": {
+      "passed": 48,
+      "total": 77,
+      "pct": 62.3,
+      "failures": [
+        {
+          "file": "quality/clean_48k.wav",
+          "ok": false,
+          "detail": "expected speech got mixed"
+        },
+        {
+          "file": "snr/v0t0_babble_00db.wav",
+          "ok": false,
+          "detail": "expected speech got mixed"
+        },
+        {
+          "file": "snr/v0t0_babble_05db.wav",
+          "ok": false,
+          "detail": "expected speech got mixed"
+        },
+        {
+          "file": "snr/v0t0_babble_30db.wav",
+          "ok": false,
+          "detail": "expected speech got mixed"
+        },
+        {
+          "file": "snr/v0t1_white_30db.wav",
+          "ok": false,
+          "detail": "expected speech got mixed"
+        },
+        {
+          "file": "snr/v0t1_pink_30db.wav",
+          "ok": false,
+          "detail": "expected speech got mixed"
+        },
+        {
+          "file": "snr/v0t1_babble_00db.wav",
+          "ok": false,
+          "detail": "expected speech got mixed"
+        },
+        {
+          "file": "snr/v0t1_babble_05db.wav",
+          "ok": false,
+          "detail": "expected speech got mixed"
+        },
+        {
+          "file": "snr/v0t1_babble_10db.wav",
+          "ok": false,
+          "detail": "expected speech got mixed"
+        },
+        {
+          "file": "snr/v0t1_babble_15db.wav",
+          "ok": false,
+          "detail": "expected speech got mixed"
+        },
+        {
+          "file": "snr/v0t1_babble_20db.wav",
+          "ok": false,
+          "detail": "expected speech got mixed"
+        },
+        {
+          "file": "snr/v0t1_babble_30db.wav",
+          "ok": false,
+          "detail": "expected speech got mixed"
+        },
+        {
+          "file": "snr/v1t0_white_30db.wav",
+          "ok": false,
+          "detail": "expected speech got mixed"
+        },
+        {
+          "file": "snr/v1t0_pink_30db.wav",
+          "ok": false,
+          "detail": "expected speech got mixed"
+        },
+        {
+          "file": "snr/v1t0_babble_00db.wav",
+          "ok": false,
+          "detail": "expected speech got mixed"
+        },
+        {
+          "file": "snr/v1t0_babble_05db.wav",
+          "ok": false,
+          "detail": "expected speech got mixed"
+        },
+        {
+          "file": "snr/v1t0_babble_10db.wav",
+          "ok": false,
+          "detail": "expected speech got mixed"
+        },
+        {
+          "file": "snr/v1t0_babble_15db.wav",
+          "ok": false,
+          "detail": "expected speech got mixed"
+        },
+        {
+          "file": "snr/v1t0_babble_20db.wav",
+          "ok": false,
+          "detail": "expected speech got mixed"
+        },
+        {
+          "file": "snr/v1t0_babble_30db.wav",
+          "ok": false,
+          "detail": "expected speech got mixed"
+        },
+        {
+          "file": "snr/v1t1_white_30db.wav",
+          "ok": false,
+          "detail": "expected speech got mixed"
+        },
+        {
+          "file": "snr/v1t1_pink_30db.wav",
+          "ok": false,
+          "detail": "expected speech got mixed"
+        },
+        {
+          "file": "snr/v1t1_babble_00db.wav",
+          "ok": false,
+          "detail": "expected speech got mixed"
+        },
+        {
+          "file": "snr/v1t1_babble_05db.wav",
+          "ok": false,
+          "detail": "expected speech got mixed"
+        },
+        {
+          "file": "snr/v1t1_babble_10db.wav",
+          "ok": false,
+          "detail": "expected speech got mixed"
+        },
+        {
+          "file": "snr/v1t1_babble_15db.wav",
+          "ok": false,
+          "detail": "expected speech got mixed"
+        },
+        {
+          "file": "snr/v1t1_babble_20db.wav",
+          "ok": false,
+          "detail": "expected speech got mixed"
+        },
+        {
+          "file": "snr/v1t1_babble_30db.wav",
+          "ok": false,
+          "detail": "expected speech got mixed"
+        },
+        {
+          "file": "routes/podcast.mp3",
+          "ok": false,
+          "detail": "expected speech got mixed"
+        }
+      ]
+    },
+    "language ID: VoxLingua107": {
+      "passed": 73,
+      "total": 73,
+      "pct": 100.0,
+      "failures": []
+    },
+    "AI-speech flag on known-synthetic speech: AASIST": {
+      "passed": 73,
+      "total": 73,
+      "pct": 100.0,
+      "failures": []
+    },
+    "clipping": {
+      "passed": 1,
+      "total": 1,
+      "pct": 100.0,
+      "failures": []
+    },
+    "hum": {
+      "passed": 2,
+      "total": 2,
+      "pct": 100.0,
+      "failures": []
+    },
+    "dc offset": {
+      "passed": 1,
+      "total": 1,
+      "pct": 100.0,
+      "failures": []
+    },
+    "dropouts": {
+      "passed": 1,
+      "total": 1,
+      "pct": 100.0,
+      "failures": []
+    },
+    "silence padding": {
+      "passed": 1,
+      "total": 1,
+      "pct": 100.0,
+      "failures": []
+    },
+    "routing": {
+      "passed": 11,
+      "total": 12,
+      "pct": 91.7,
+      "failures": [
+        {
+          "file": "routes/mixed_music_speech.wav",
+          "ok": false,
+          "detail": "expected R10 got R08"
+        }
+      ]
+    },
+    "extension mismatch": {
+      "passed": 1,
+      "total": 1,
+      "pct": 100.0,
+      "failures": []
+    },
+    "duplicates": {
+      "passed": 7,
+      "total": 7,
+      "pct": 100.0,
+      "failures": []
+    }
+  },
+  "snr_candidates": {
+    "snr.wada": {
+      "files": 72,
+      "mae_db": 3.88,
+      "within_3db_pct": 61.1,
+      "mae_by_noise": {
+        "white": 1.17,
+        "pink": 1.18,
+        "babble": 9.3
+      },
+      "realtime_x": 14807.2
+    },
+    "snr.energy": {
+      "files": 72,
+      "mae_db": 5.04,
+      "within_3db_pct": 50.0,
+      "mae_by_noise": {
+        "white": 2.01,
+        "pink": 2.93,
+        "babble": 10.18
+      },
+      "realtime_x": 11731.5
+    }
+  },
+  "step_speed": {
+    "decode.probe": {
+      "ms": 7489.050000000001,
+      "audio_s": 1729.2299999999957,
+      "calls": 116,
+      "realtime_x": 230.9
+    },
+    "decode.full": {
+      "ms": 6996.580000000002,
+      "audio_s": 1729.2299999999957,
+      "calls": 116,
+      "realtime_x": 247.2
+    },
+    "gates.basic": {
+      "ms": 33.36,
+      "audio_s": 1729.2299999999957,
+      "calls": 116,
+      "realtime_x": 51835.4
+    },
+    "cache.lookup": {
+      "ms": 0.06,
+      "audio_s": 1683.1509999999957,
+      "calls": 109,
+      "realtime_x": 28052516.7
+    },
+    "dsp.levels": {
+      "ms": 3108.0400000000004,
+      "audio_s": 1626.5709999999958,
+      "calls": 105,
+      "realtime_x": 523.3
+    },
+    "dsp.loudness": {
+      "ms": 1286.1399999999996,
+      "audio_s": 1626.5709999999958,
+      "calls": 105,
+      "realtime_x": 1264.7
+    },
+    "dsp.silence": {
+      "ms": 201.69000000000005,
+      "audio_s": 1626.5709999999958,
+      "calls": 105,
+      "realtime_x": 8064.7
+    },
+    "dsp.bit_depth": {
+      "ms": 322.41000000000025,
+      "audio_s": 1626.5709999999958,
+      "calls": 105,
+      "realtime_x": 5045.0
+    },
+    "dsp.spectral": {
+      "ms": 3910.589999999999,
+      "audio_s": 1626.5709999999958,
+      "calls": 105,
+      "realtime_x": 415.9
+    },
+    "dsp.hum": {
+      "ms": 3970.860000000003,
+      "audio_s": 1626.5709999999958,
+      "calls": 105,
+      "realtime_x": 409.6
+    },
+    "dsp.dropouts": {
+      "ms": 942.2400000000005,
+      "audio_s": 1626.5709999999958,
+      "calls": 105,
+      "realtime_x": 1726.3
+    },
+    "dsp.stereo": {
+      "ms": 63.059999999999995,
+      "audio_s": 1626.5709999999958,
+      "calls": 105,
+      "realtime_x": 25794.0
+    },
+    "snr.wada": {
+      "ms": 109.84999999999997,
+      "audio_s": 1626.5709999999958,
+      "calls": 105,
+      "realtime_x": 14807.2
+    },
+    "fingerprint.compute": {
+      "ms": 4725.379999999999,
+      "audio_s": 1626.5709999999958,
+      "calls": 105,
+      "realtime_x": 344.2
+    },
+    "classify.content.gpu": {
+      "ms": 11374.81,
+      "audio_s": 1626.5709999999958,
+      "calls": 105,
+      "realtime_x": 143.0
+    },
+    "vad": {
+      "ms": 20634.450000000008,
+      "audio_s": 1474.883999999996,
+      "calls": 99,
+      "realtime_x": 71.5
+    },
+    "snr.energy": {
+      "ms": 138.65000000000003,
+      "audio_s": 1626.5709999999958,
+      "calls": 105,
+      "realtime_x": 11731.5
+    },
+    "classify.content.dsp": {
+      "ms": 2679.31,
+      "audio_s": 1626.5709999999958,
+      "calls": 105,
+      "realtime_x": 607.1
+    },
+    "mos.speech": {
+      "ms": 105414.67999999996,
+      "audio_s": 1447.3419999999962,
+      "calls": 98,
+      "realtime_x": 13.7
+    },
+    "ai_detect": {
+      "ms": 2724.760000000001,
+      "audio_s": 1419.7999999999963,
+      "calls": 97,
+      "realtime_x": 521.1
+    },
+    "lid": {
+      "ms": 1959.9499999999998,
+      "audio_s": 1392.2579999999966,
+      "calls": 96,
+      "realtime_x": 710.4
+    },
+    "events.tagging": {
+      "ms": 0.48,
+      "audio_s": 90.0,
+      "calls": 3,
+      "realtime_x": 187500.0
+    },
+    "duplex.stats": {
+      "ms": 13.15,
+      "audio_s": 27.542,
+      "calls": 1,
+      "realtime_x": 2094.4
+    }
+  },
+  "routes": {
+    "R07": 5,
+    "R00": 7,
+    "R03": 93,
+    "R02": 2,
+    "R01": 4,
+    "R09": 1,
+    "R05": 1,
+    "R08": 2,
+    "R04": 1
+  },
+  "pending_steps_skipped": {
+    "bundle.verify_tracks": 2,
+    "asr": 97,
+    "pii.detect": 97,
+    "music.analysis": 3,
+    "snr_c50": 95,
+    "align.words": 95,
+    "quality.general": 3,
+    "duplex.crosstalk": 1,
+    "separate.vocals": 2
+  },
+  "bundles": {
+    "bundle_001": {
+      "declared": 3,
+      "valid": 2,
+      "tracks": 3
+    }
+  },
+  "gpu": {
+    "device": "cuda",
+    "model_load_s": {
+      "silero_vad": 0.25,
+      "efficientat_mn10": 2.83,
+      "utmosv2": 12.98,
+      "voxlingua107": 1.35,
+      "aasist": 0.17
+    },
+    "peak_allocated_mb": 2486
+  },
+  "vad": {
+    "files": 73,
+    "mean_f1": 0.946,
+    "f1_by_snr": {
+      "0": 0.931,
+      "5": 0.938,
+      "10": 0.942,
+      "15": 0.943,
+      "20": 0.951,
+      "30": 0.966,
+      "35": 0.977
+    },
+    "f1_by_noise": {
+      "white": 0.964,
+      "pink": 0.965,
+      "babble": 0.907
+    }
+  },
+  "mos": {
+    "series": 12,
+    "mean_spearman_vs_snr": 0.343,
+    "mean_mos_by_snr": {
+      "0": 1.91,
+      "5": 1.81,
+      "10": 1.91,
+      "15": 2.01,
+      "20": 2.13,
+      "30": 2.31
+    }
+  }
+}

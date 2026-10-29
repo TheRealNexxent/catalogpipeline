@@ -1,0 +1,18 @@
+{
+  "name": "Modifier \u00b7 Declared language",
+  "kind": "modifier",
+  "version": 1,
+  "description": "Partner declared the language: LID only confirms it on one sample instead of several windows.",
+  "trigger": [
+    [
+      "declared_language",
+      "!=",
+      null
+    ]
+  ],
+  "force_params": {
+    "lid": {
+      "windows": 1
+    }
+  }
+}

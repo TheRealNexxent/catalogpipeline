@@ -1,0 +1,20 @@
+{
+  "name": "Modifier \u00b7 Children's speech",
+  "kind": "modifier",
+  "version": 1,
+  "description": "Adds the age model and strict PII.",
+  "trigger": [
+    [
+      "domain",
+      "==",
+      "children"
+    ]
+  ],
+  "add_steps": [
+    "demographics",
+    "pii.detect"
+  ],
+  "policy": {
+    "consent_flag_required": true
+  }
+}
